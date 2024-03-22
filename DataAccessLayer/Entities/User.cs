@@ -16,9 +16,7 @@ public class User : IdentityUser
   [Required, StringLength(200)]
   public string Address { get; set; } = string.Empty;
 
-  public ICollection<Furniture> LikedItems { get; set; }
-      = new List<Furniture>();
+  public ICollection<Furniture> LikedItems { get; set; } = [];
 
-  public ICollection<Feedback> Feedbacks { get; set; }
-      = new List<Feedback>();
+  public ICollection<Feedback> Feedbacks { get; set; } = [];
 }

@@ -17,9 +17,7 @@ public class UnitOfWork(AppDbContext dbContext) : IUnitOfWork
 
   public IFeedbackBanRepository FeedbackBans => new FeedbackBanRepository(dbContext);
 
-  public void Dispose()
-      => GC.SuppressFinalize(this);
+  public void Dispose() => GC.SuppressFinalize(this);
 
-  public async Task SaveAsync()
-      => await dbContext.SaveChangesAsync();
+  public async Task SaveAsync() => await dbContext.SaveChangesAsync();
 }

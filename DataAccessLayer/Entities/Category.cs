@@ -11,6 +11,6 @@ public class Category : BaseEntity
   [Required]
   public string ImageUrl { get; set; } = string.Empty;
 
-  public ICollection<Furniture> Furnitures { get; set; }
-      = new List<Furniture>();
+  // TODO: What happened if I change ICollection to IEnumerable
+  public ICollection<Furniture> Furnitures { get; set; } = [];
 }

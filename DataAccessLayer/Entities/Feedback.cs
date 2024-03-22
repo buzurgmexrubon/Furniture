@@ -16,6 +16,5 @@ public class Feedback : BaseEntity
 
   public Furniture Furniture { get; set; } = new();
 
-  public ICollection<Image> Images { get; set; }
-      = new List<Image>();
+  public ICollection<Image> Images { get; set; } = [];
 }

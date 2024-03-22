@@ -28,12 +28,9 @@ public class Furniture : BaseEntity
 
   public Category? Category { get; set; } = new();
 
-  public ICollection<Image> Images { get; set; }
-      = new List<Image>();
+  public ICollection<Image> Images { get; set; } = [];
 
-  public ICollection<FurnitureColor>? Colors { get; set; }
-      = new List<FurnitureColor>();
+  public ICollection<FurnitureColor>? Colors { get; set; } = [];
 
-  public ICollection<Feedback> Feedbacks { get; set; }
-      = new List<Feedback>();
+  public ICollection<Feedback> Feedbacks { get; set; } = [];
 }
