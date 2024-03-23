@@ -10,25 +10,25 @@ public class ColorService(IUnitOfWork unitOfWork)
   /// </summary>
   /// <param name="colorDto"></param>
   /// <returns></returns>
-  /// <exception cref="MarketException"></exception>
+  /// <exception cref="FurnitureException"></exception>
   public async Task<ColorDto> CreateAsync(AddColorDto colorDto,
                                              Language language)
   {
     if (colorDto is null)
     {
-      throw new MarketException("Color was null");
+      throw new FurnitureException("Color was null");
     }
 
     var model = (Color)colorDto;
     if (!model.IsValidColor())
     {
-      throw new MarketException("Color is not valid");
+      throw new FurnitureException("Color is not valid");
     }
 
     var categories = await _unitOfWork.Colors.GetAllAsync();
     if (model.IsExist(categories))
     {
-      throw new MarketException("Color already exists");
+      throw new FurnitureException("Color already exists");
     }
 
     model = _unitOfWork.Colors.Add(model);
@@ -42,13 +42,13 @@ public class ColorService(IUnitOfWork unitOfWork)
   /// <param name="id"></param>
   /// <param name="action"></param>
   /// <returns></returns>
-  /// <exception cref="MarketException"></exception>
+  /// <exception cref="FurnitureException"></exception>
   public async Task ActionAsync(int id, ActionType action)
   {
     var color = await _unitOfWork.Colors.GetByIdAsync(id);
     if (color is null)
     {
-      throw new MarketException("Color not found");
+      throw new FurnitureException("Color not found");
     }
 
     switch (action)
@@ -103,12 +103,12 @@ public class ColorService(IUnitOfWork unitOfWork)
   /// </summary>
   /// <param name="id"></param>
   /// <returns></returns>
-  /// <exception cref="MarketException"></exception>
+  /// <exception cref="FurnitureException"></exception>
   public async Task<ColorDto> GetByIdAsync(int id, Language language)
   {
     var color = await _unitOfWork.Colors.GetByIdAsync(id);
     return color is null ?
-        throw new MarketException("Color not found") : color.ToDto(language);
+        throw new FurnitureException("Color not found") : color.ToDto(language);
   }
 
   /// <summary>
@@ -116,31 +116,31 @@ public class ColorService(IUnitOfWork unitOfWork)
   /// </summary>
   /// <param name="colorDto"></param>
   /// <returns></returns>
-  /// <exception cref="MarketException"></exception>
+  /// <exception cref="FurnitureException"></exception>
   public async Task<ColorDto> UpdateAsync(UpdateColorDto colorDto,
                                              Language language)
   {
     if (colorDto is null)
     {
-      throw new MarketException("Color was null");
+      throw new FurnitureException("Color was null");
     }
 
     var color = await _unitOfWork.Colors.GetByIdAsync(colorDto.Id);
     if (color is null)
     {
-      throw new MarketException("Color not found");
+      throw new FurnitureException("Color not found");
     }
 
     var model = (Color)colorDto;
     if (!model.IsValidColor())
     {
-      throw new MarketException("Color is not valid");
+      throw new FurnitureException("Color is not valid");
     }
 
     var categories = await _unitOfWork.Colors.GetAllAsync();
     if (model.IsNotUnique(categories))
     {
-      throw new MarketException("Color already exists");
+      throw new FurnitureException("Color already exists");
     }
 
     _unitOfWork.Colors.Update(model);
@@ -148,7 +148,7 @@ public class ColorService(IUnitOfWork unitOfWork)
     model = await _unitOfWork.Colors.GetByIdAsync(colorDto.Id);
     if (model is null)
     {
-      throw new MarketException("Color not found");
+      throw new FurnitureException("Color not found");
     }
     return model.ToDto(language);
   }

@@ -13,25 +13,25 @@ public class CategoryService(IUnitOfWork unitOfWork,
   /// </summary>
   /// <param name="categoryDto"></param>
   /// <returns></returns>
-  /// <exception cref="MarketException"></exception>
+  /// <exception cref="FurnitureException"></exception>
   public async Task<CategoryDto> CreateAsync(AddCategoryDto categoryDto,
                                              Language language)
   {
     if (categoryDto is null)
     {
-      throw new MarketException("Category was null");
+      throw new FurnitureException("Category was null");
     }
 
     var model = (Category)categoryDto;
     if (!model.IsValidCategory())
     {
-      throw new MarketException("Category is not valid");
+      throw new FurnitureException("Category is not valid");
     }
 
     var categories = await _unitOfWork.Categories.GetAllAsync();
     if (model.IsExist(categories))
     {
-      throw new MarketException("Category already exists");
+      throw new FurnitureException("Category already exists");
     }
 
     model = _unitOfWork.Categories.Add(model);
@@ -46,13 +46,13 @@ public class CategoryService(IUnitOfWork unitOfWork,
   /// <param name="id"></param>
   /// <param name="action"></param>
   /// <returns></returns>
-  /// <exception cref="MarketException"></exception>
+  /// <exception cref="FurnitureException"></exception>
   public async Task ActionAsync(int id, ActionType action)
   {
     var category = await _unitOfWork.Categories.GetByIdAsync(id);
     if (category is null)
     {
-      throw new MarketException("Category not found");
+      throw new FurnitureException("Category not found");
     }
 
     switch (action)
@@ -109,12 +109,12 @@ public class CategoryService(IUnitOfWork unitOfWork,
   /// </summary>
   /// <param name="id"></param>
   /// <returns></returns>
-  /// <exception cref="MarketException"></exception>
+  /// <exception cref="FurnitureException"></exception>
   public async Task<CategoryDto> GetByIdAsync(int id, Language language)
   {
     var category = await _unitOfWork.Categories.GetByIdAsync(id);
     return category is null ?
-        throw new MarketException("Category not found") : category.ToDto(language);
+        throw new FurnitureException("Category not found") : category.ToDto(language);
   }
 
   /// <summary>
@@ -122,31 +122,31 @@ public class CategoryService(IUnitOfWork unitOfWork,
   /// </summary>
   /// <param name="categoryDto"></param>
   /// <returns></returns>
-  /// <exception cref="MarketException"></exception>
+  /// <exception cref="FurnitureException"></exception>
   public async Task<CategoryDto> UpdateAsync(UpdateCategoryDto categoryDto,
                                              Language language)
   {
     if (categoryDto is null)
     {
-      throw new MarketException("Category was null");
+      throw new FurnitureException("Category was null");
     }
 
     var category = await _unitOfWork.Categories.GetByIdAsync(categoryDto.Id);
     if (category is null)
     {
-      throw new MarketException("Category not found");
+      throw new FurnitureException("Category not found");
     }
 
     var model = (Category)categoryDto;
     if (!model.IsValidCategory())
     {
-      throw new MarketException("Category is not valid");
+      throw new FurnitureException("Category is not valid");
     }
 
     var categories = await _unitOfWork.Categories.GetAllAsync();
     if (model.IsNotUnique(categories))
     {
-      throw new MarketException("Category already exists");
+      throw new FurnitureException("Category already exists");
     }
 
     _unitOfWork.Categories.Update(model);
@@ -154,7 +154,7 @@ public class CategoryService(IUnitOfWork unitOfWork,
     model = await _unitOfWork.Categories.GetByIdAsync(categoryDto.Id);
     if (model is null)
     {
-      throw new MarketException("Category not found");
+      throw new FurnitureException("Category not found");
     }
     await _cache.RemoveAsync(_cacheKey);
     return model.ToDto(language);

@@ -23,7 +23,7 @@ public class UserService(UserManager<User> userManager,
   /// <param name="dto"></param>
   /// <returns></returns>
   /// <exception cref="ArgumentNullException"></exception>
-  /// <exception cref="MarketException"></exception>
+  /// <exception cref="FurnitureException"></exception>
   public async Task ChangePasswordAsync(ChangePasswordDto dto)
   {
     if (dto is null)
@@ -42,7 +42,7 @@ public class UserService(UserManager<User> userManager,
                                                   dto.NewPassword);
     if (!resul.Succeeded)
     {
-      throw new MarketException("Failed to change password");
+      throw new FurnitureException("Failed to change password");
     }
   }
 
@@ -52,7 +52,7 @@ public class UserService(UserManager<User> userManager,
   /// <param name="dto"></param>
   /// <returns></returns>
   /// <exception cref="ArgumentNullException"></exception>
-  /// <exception cref="MarketException"></exception>
+  /// <exception cref="FurnitureException"></exception>
   public async Task ConfirmPhoneNumberAsync(ConfirmPhoneNumberDto dto)
   {
     var user = await _userManager.FindByNameAsync(dto.PhoneNumber);
@@ -74,12 +74,12 @@ public class UserService(UserManager<User> userManager,
     {
       _unitOfWork.OtpModels.Delete(otp.Id);
       await _unitOfWork.SaveAsync();
-      throw new MarketException("OTP expired");
+      throw new FurnitureException("OTP expired");
     }
 
     if (otp.Code != dto.Code)
     {
-      throw new MarketException("Invalid OTP");
+      throw new FurnitureException("Invalid OTP");
     }
 
     user.PhoneNumberConfirmed = true;
@@ -95,7 +95,7 @@ public class UserService(UserManager<User> userManager,
   /// <param name="dto"></param>
   /// <returns></returns>
   /// <exception cref="ArgumentNullException"></exception>
-  /// <exception cref="MarketException"></exception>
+  /// <exception cref="FurnitureException"></exception>
   public async Task CreateAsync(RegisterUserDto dto, string role)
   {
     if (dto is null)
@@ -105,7 +105,7 @@ public class UserService(UserManager<User> userManager,
 
     if (!dto.IsValid())
     {
-      throw new MarketException("Invalid data");
+      throw new FurnitureException("Invalid data");
     }
     var user = (User)dto;
 
@@ -113,14 +113,14 @@ public class UserService(UserManager<User> userManager,
     var result = await _userManager.CreateAsync(user, dto.Password);
     if (!result.Succeeded)
     {
-      throw new MarketException($"Failed to create user: {string.Join("\n", result.Errors
+      throw new FurnitureException($"Failed to create user: {string.Join("\n", result.Errors
                                                                             .Select(er => er.Description))}");
     }
 
     result = await _userManager.AddToRoleAsync(user, role);
     if (!result.Succeeded)
     {
-      throw new MarketException($"Failed to add user to role: {string.Join("\n", result.Errors)}");
+      throw new FurnitureException($"Failed to add user to role: {string.Join("\n", result.Errors)}");
     }
   }
 
@@ -143,7 +143,7 @@ public class UserService(UserManager<User> userManager,
     var result = await _userManager.DeleteAsync(user);
     if (!result.Succeeded)
     {
-      throw new MarketException("Failed to delete user");
+      throw new FurnitureException("Failed to delete user");
     }
   }
 
@@ -153,7 +153,7 @@ public class UserService(UserManager<User> userManager,
   /// <param name="dto"></param>
   /// <returns></returns>
   /// <exception cref="ArgumentNullException"></exception>
-  /// <exception cref="MarketException"></exception>
+  /// <exception cref="FurnitureException"></exception>
   public async Task<LoginResult> LoginAsync(LoginUserDto dto)
   {
     if (dto is null)
@@ -163,7 +163,7 @@ public class UserService(UserManager<User> userManager,
 
     if (!dto.IsValid())
     {
-      throw new MarketException("Invalid data");
+      throw new FurnitureException("Invalid data");
     }
 
     var user = await _userManager.FindByNameAsync(dto.PhoneNumber);
@@ -175,13 +175,13 @@ public class UserService(UserManager<User> userManager,
     var phoneNumberConfirmed = await _userManager.IsPhoneNumberConfirmedAsync(user);
     if (!phoneNumberConfirmed)
     {
-      throw new MarketException("Phone number not confirmed");
+      throw new FurnitureException("Phone number not confirmed");
     }
 
     var result = await _signInManager.PasswordSignInAsync(user, dto.Password, false, false);
     if (!result.Succeeded)
     {
-      throw new MarketException("Invalid password");
+      throw new FurnitureException("Invalid password");
     }
 
     var roles = await _userManager.GetRolesAsync(user);
@@ -267,7 +267,7 @@ public class UserService(UserManager<User> userManager,
   /// </summary>
   /// <param name="phoneNumber"></param>
   /// <returns></returns>
-  /// <exception cref="MarketException"></exception>
+  /// <exception cref="FurnitureException"></exception>
   public async Task SendOtpAsync(SendOtpDto dto)
   {
     var email = _configuration["EskizUz:Email"] ?? "";
@@ -277,7 +277,7 @@ public class UserService(UserManager<User> userManager,
 
     if (!result.Success)
     {
-      throw new MarketException("Failed to send OTP");
+      throw new FurnitureException("Failed to send OTP");
     }
 
     var otpModel = new OtpModel()
@@ -410,7 +410,7 @@ public class UserService(UserManager<User> userManager,
   /// <param name="dto"></param>
   /// <returns></returns>
   /// <exception cref="ArgumentNullException"></exception>
-  /// <exception cref="MarketException"></exception>
+  /// <exception cref="FurnitureException"></exception>
   public async Task UpdateUserAsync(UpdateUserDto dto)
   {
     if (dto is null)
@@ -434,7 +434,7 @@ public class UserService(UserManager<User> userManager,
       var exsistingUser = await _userManager.FindByNameAsync(dto.PhoneNumber);
       if (exsistingUser is not null)
       {
-        throw new MarketException("Phone number already exists");
+        throw new FurnitureException("Phone number already exists");
       }
       else
       {
@@ -448,7 +448,7 @@ public class UserService(UserManager<User> userManager,
     var res = await _userManager.UpdateAsync(user);
     if (!res.Succeeded)
     {
-      throw new MarketException("Failed to update user");
+      throw new FurnitureException("Failed to update user");
     }
   }
 
@@ -459,7 +459,7 @@ public class UserService(UserManager<User> userManager,
   /// <param name="phoneNumber"></param>
   /// <returns></returns>
   /// <exception cref="ArgumentNullException"></exception>
-  /// <exception cref="MarketException"></exception>
+  /// <exception cref="FurnitureException"></exception>
   public async Task ChangePhoneNumber(string userId, string phoneNumber)
   {
     var user = await _userManager.FindByIdAsync(userId);
@@ -472,7 +472,7 @@ public class UserService(UserManager<User> userManager,
     var res = await _userManager.UpdateAsync(user);
     if (!res.Succeeded)
     {
-      throw new MarketException("Failed to update user");
+      throw new FurnitureException("Failed to update user");
     }
   }
 
@@ -482,7 +482,7 @@ public class UserService(UserManager<User> userManager,
   /// <param name="dto"></param>
   /// <returns></returns>
   /// <exception cref="ArgumentNullException"></exception>
-  /// <exception cref="MarketException"></exception>
+  /// <exception cref="FurnitureException"></exception>
   public async Task CreateAdminAsync(NewAdminDto dto)
   {
     if (dto is null)
@@ -492,7 +492,7 @@ public class UserService(UserManager<User> userManager,
 
     if (!dto.IsValid())
     {
-      throw new MarketException("Invalid data");
+      throw new FurnitureException("Invalid data");
     }
 
     var user = (User)dto;
@@ -503,14 +503,14 @@ public class UserService(UserManager<User> userManager,
     var result = await _userManager.CreateAsync(user, randomPassword);
     if (!result.Succeeded)
     {
-      throw new MarketException($"Failed to create admin: {string.Join("\n", result.Errors
+      throw new FurnitureException($"Failed to create admin: {string.Join("\n", result.Errors
                                                                             .Select(er => er.Description))}");
     }
 
     result = await _userManager.AddToRoleAsync(user, UserRoles.Admin);
     if (!result.Succeeded)
     {
-      throw new MarketException($"Failed to add user to role: {string.Join("\n", result.Errors)}");
+      throw new FurnitureException($"Failed to add user to role: {string.Join("\n", result.Errors)}");
     }
   }
 
@@ -520,7 +520,7 @@ public class UserService(UserManager<User> userManager,
   /// <param name="userId"></param>
   /// <returns></returns>
   /// <exception cref="ArgumentNullException"></exception>
-  /// <exception cref="MarketException"></exception>
+  /// <exception cref="FurnitureException"></exception>
   public async Task ActivateAdminAsync(string userId)
   {
     var user = await _userManager.FindByIdAsync(userId);
@@ -531,12 +531,12 @@ public class UserService(UserManager<User> userManager,
 
     if (!user.PhoneNumberConfirmed)
     {
-      throw new MarketException("Phone number not confirmed");
+      throw new FurnitureException("Phone number not confirmed");
     }
 
     if (user.EmailConfirmed)
     {
-      throw new MarketException("User already activated");
+      throw new FurnitureException("User already activated");
     }
 
     string message = $"""
@@ -555,7 +555,7 @@ public class UserService(UserManager<User> userManager,
     var result = await messager.SendSMSAsync(user.PhoneNumber!, message);
     if (!result)
     {
-      throw new MarketException("Failed to send SMS");
+      throw new FurnitureException("Failed to send SMS");
     }
     user.EmailConfirmed = true;
     await _userManager.UpdateAsync(user);
@@ -567,7 +567,7 @@ public class UserService(UserManager<User> userManager,
   /// <param name="userId"></param>
   /// <returns></returns>
   /// <exception cref="ArgumentNullException"></exception>
-  /// <exception cref="MarketException"></exception>
+  /// <exception cref="FurnitureException"></exception>
   public async Task ResetPassword(string userId)
   {
     var user = await _userManager.FindByIdAsync(userId);
@@ -584,7 +584,7 @@ public class UserService(UserManager<User> userManager,
     var result = await _userManager.UpdateAsync(user);
     if (!result.Succeeded)
     {
-      throw new MarketException("Failed to update user");
+      throw new FurnitureException("Failed to update user");
     }
 
     string message = $"""
@@ -603,7 +603,7 @@ public class UserService(UserManager<User> userManager,
     var res = await messager.SendSMSAsync(user.PhoneNumber!, message);
     if (!res)
     {
-      throw new MarketException("Failed to send SMS");
+      throw new FurnitureException("Failed to send SMS");
     }
   }
 }

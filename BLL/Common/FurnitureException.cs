@@ -1,6 +1,6 @@
 ﻿namespace BLL.Common;
 
-public class MarketException(string message)
+public class FurnitureException(string message)
     : Exception(message)
 {
 }

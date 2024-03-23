@@ -21,25 +21,25 @@ public class FurnitureService(IUnitOfWork unitOfWork,
   /// </summary>
   /// <param name="furnitureDto"></param>
   /// <returns></returns>
-  /// <exception cref="MarketException"></exception>
+  /// <exception cref="FurnitureException"></exception>
   public async Task<FurnitureDto> CreateAsync(AddFurnitureDto furnitureDto,
                                              Language language)
   {
     if (furnitureDto is null)
     {
-      throw new MarketException("Furniture was null");
+      throw new FurnitureException("Furniture was null");
     }
 
     var model = (Furniture)furnitureDto;
     if (!model.IsValidFurniture())
     {
-      throw new MarketException("Furniture is not valid");
+      throw new FurnitureException("Furniture is not valid");
     }
 
     var furnitures = await _unitOfWork.Furnitures.GetAllAsync();
     if (model.IsExist(furnitures))
     {
-      throw new MarketException("Furniture already exists");
+      throw new FurnitureException("Furniture already exists");
     }
 
     var colorIds = furnitureDto.ColorIds
@@ -51,7 +51,7 @@ public class FurnitureService(IUnitOfWork unitOfWork,
       var color = colors.FirstOrDefault(c => c.Id == colorId);
       if (color is null)
       {
-        throw new MarketException("Color not found");
+        throw new FurnitureException("Color not found");
       }
       model.Colors!.Add(new FurnitureColor()
       {
@@ -88,13 +88,13 @@ public class FurnitureService(IUnitOfWork unitOfWork,
   /// <param name="id"></param>
   /// <param name="action"></param>
   /// <returns></returns>
-  /// <exception cref="MarketException"></exception>
+  /// <exception cref="FurnitureException"></exception>
   public async Task ActionAsync(int id, ActionType action)
   {
     var furniture = await _unitOfWork.Furnitures.GetByIdAsync(id);
     if (furniture is null)
     {
-      throw new MarketException("Furniture not found");
+      throw new FurnitureException("Furniture not found");
     }
 
     switch (action)
@@ -152,12 +152,12 @@ public class FurnitureService(IUnitOfWork unitOfWork,
   /// </summary>
   /// <param name="id"></param>
   /// <returns></returns>
-  /// <exception cref="MarketException"></exception>
+  /// <exception cref="FurnitureException"></exception>
   public async Task<FurnitureDto> GetByIdAsync(int id, Language language)
   {
     var furniture = await _unitOfWork.Furnitures.GetByIdAsyncWithDependencies(id);
     return furniture is null ?
-        throw new MarketException("Furniture not found") : furniture.ToDto(language);
+        throw new FurnitureException("Furniture not found") : furniture.ToDto(language);
   }
 
   /// <summary>
@@ -165,7 +165,7 @@ public class FurnitureService(IUnitOfWork unitOfWork,
   /// </summary>
   /// <param name="furnitureDto"></param>
   /// <returns></returns>
-  /// <exception cref="MarketException"></exception>
+  /// <exception cref="FurnitureException"></exception>
   public async Task<FurnitureDto> UpdateAsync(UpdateFurnitureDto furnitureDto,
                                              Language language)
   {
@@ -183,13 +183,13 @@ public class FurnitureService(IUnitOfWork unitOfWork,
     var model = (Furniture)furnitureDto;
     if (!model.IsValidFurniture())
     {
-      throw new MarketException("Furniture is not valid");
+      throw new FurnitureException("Furniture is not valid");
     }
 
     var furnitures = await _unitOfWork.Furnitures.GetAllAsync();
     if (model.IsNotUnique(furnitures))
     {
-      throw new MarketException("Furniture already exists");
+      throw new FurnitureException("Furniture already exists");
     }
 
     var colorIds = furnitureDto.ColorIds
@@ -237,7 +237,7 @@ public class FurnitureService(IUnitOfWork unitOfWork,
 
     if (model is null)
     {
-      throw new MarketException("Furniture not found");
+      throw new FurnitureException("Furniture not found");
     }
     imageDiffs = furnitureDto.ImageUrls.Except(furniture.Images.Select(i => i.Url));
     foreach (var imageUrl in imageDiffs)
@@ -259,6 +259,6 @@ public class FurnitureService(IUnitOfWork unitOfWork,
   {
     var furniture = await _unitOfWork.Furnitures.GetByIdAsyncWithDependencies(id);
     return furniture is null ?
-        throw new MarketException("Furniture not found") : (SingleFurnitureDto)furniture;
+        throw new FurnitureException("Furniture not found") : (SingleFurnitureDto)furniture;
   }
 }
