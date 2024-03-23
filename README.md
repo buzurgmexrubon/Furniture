@@ -1,20 +1,17 @@
-# Furniture
-
-> ## About ECOMMERCE
-> The _Furniture_ API is the backend connection between the client side and the [PostgreSQL](https://www.postgresql.org/) database. This API utilizes multiple models: Category, Color, Feedback, FeedbackBan, Image, Furniture, OtpModel and User.
-
+# FURNITURE API
 ![](https://img.shields.io/badge/DotNet-8-blue.svg)
 ![](https://img.shields.io/badge/License-MIT-orange.svg)
 
-> ## Features
-> 
-
-> ## Structure
-> ![Structure-Files](./structure_files.png)
+> ## About
+> The _Furniture_ API is the backend connection between the client side and the [PostgreSQL](https://www.postgresql.org/) database. This API utilizes multiple models: Category, Color, Feedback, FeedbackBan, Image, Furniture, OtpModel and User.
 
 
-> ## Packages
-> BLL (Business Logic Layer)
+## Structure
+<img src="./structure_files.png" alt="Structure files" width="200"/>
+
+
+## Packages
+- BLL (Business Logic Layer)
 -- Admin
 --- BLL.csproj
 ---- ![](https://img.shields.io/badge/Messager.EskizUz-2.0.0-blue.svg)
@@ -42,8 +39,8 @@
 
 
 
-> ## Catalogue of Routes
->> ### Admin
+## Catalogue of Routes
+### Admin
 >>> | HTTP Method | URL Path |
 >>> |--|--|--|--|
 >>> | POST | /api/v1/Admin/create |
@@ -53,7 +50,7 @@
 >>> | PUT | /api/v1/Admin/activate/{userId} |
 >>> | PUT | /api/v1/Admin/reset-password/{userId} |
 
->> ### Auth
+### Auth
 >>> | HTTP Method | URL Path |
 >>> |--|--|--|--|
 >>> | POST | /api/v1/Auth/login |
@@ -69,7 +66,7 @@
 >>> | GET | /api/v1/Auth/validate-token |
 >>> | PUT | /api/v1/Auth/update-profile |
 
->> ### Category
+### Category
 >>> | HTTP Method | URL Path |
 >>> |--|--|--|--|
 >>> | GET | /api/v1/Category/{lang}/all |
@@ -82,7 +79,7 @@
 >>> | PATCH | /api/v1/Category/archive/{id} |
 >>> | PATCH | /api/v1/Category/unarchive/{id} |
 
->> ### Color
+### Color
 >>> | HTTP Method | URL Path |
 >>> |--|--|--|--|
 >>> | GET | /api/v1/Color/{lang}/all |
@@ -95,7 +92,7 @@
 >>> | PATCH | /api/v1/Color/archive/{id} |
 >>> | PATCH | /api/v1/Color/unarchive/{id} |
 
->> ### Furniture
+### Furniture
 >>> | HTTP Method | URL Path |
 >>> |--|--|--|--|
 >>> | GET | /api/v1/Furniture/{lang}/all |
@@ -108,7 +105,7 @@
 >>> | PATCH | /api/v1/Furniture/archive/{id} |
 >>> | PATCH | /api/v1/Furniture/unarchive/{id} |
 
->> ### Image
+### Image
 >>> | HTTP Method | URL Path |
 >>> |--|--|--|--|
 >>> | POST | /api/v1/Image |
@@ -116,7 +113,7 @@
 >>> | POST | /api/v1/Image/multiple |
 >>> | DELETE | /api/v1/Image/multiple |
 
->> ### Mobile
+### Mobile
 >>> | HTTP Method | URL Path |
 >>> |--|--|--|--|
 >>> | GET | /api/v1/Mobile/categories/{lang} |
@@ -128,18 +125,16 @@
 >>> | POST | /api/v1/Mobile/feedbacks |
 >>> | POST | /api/v1/Mobile/feedbacks/ban |
 
->> ### Users
+### Users
 >>> | HTTP Method | URL Path |
 >>> |--|--|--|--|
 >>> | GET | /api/v1/Users/all |
 >>> | GET | /api/v1/Users/{id} |
 >>> | DELETE | /api/v1/Users/{id} |
 
-
-> ## Entity Relationship Diagram
+## Entity Relationship Diagram
 > ![Structure](./structure.png)
 >> ###### [(Show in Web-site)](https://drawsql.app/teams/my-manager/diagrams/furniture)
->>
 
 ## Contributing💡
 If you want to contribute to this project and make it better with new ideas, your pull request is very welcomed.
