@@ -7,7 +7,7 @@
 
 
 ## Structure
-<img src="./structure_files.png" alt="Structure files" width="400"/>
+<img src="./structure_files.png" alt="Structure files" width="300"/>
 
 
 ## Packages
@@ -42,95 +42,95 @@
 ## Catalogue of Routes
 ### Admin
 | HTTP Method | URL Path |
-|--|--|--|--|
-| POST | /api/v1/Admin/create |
-| PUT | /api/v1/Admin/update |
-| GET | /api/v1/Admin/get-all |
-| DELETE | /api/v1/Admin/{id} |
-| PUT | /api/v1/Admin/activate/{userId} |
-| PUT | /api/v1/Admin/reset-password/{userId} |
+|--|--|
+| POST | /api/v{version}/Admin/create |
+| PUT | /api/v{version}/Admin/update |
+| GET | /api/v{version}/Admin/get-all |
+| DELETE | /api/v{version}/Admin/{id} |
+| PUT | /api/v{version}/Admin/activate/{userId} |
+| PUT | /api/v{version}/Admin/reset-password/{userId} |
 
 ### Auth
 | HTTP Method | URL Path |
-|--|--|--|--|
-| POST | /api/v1/Auth/login |
-| POST | /api/v1/Auth/register |
-| POST | /api/v1/Auth/send-otp |
-| POST | /api/v1/Auth/verify-otp |
-| PUT | /api/v1/Auth/logout |
-| PUT | /api/v1/Auth/change-password |
-| DELETE | /api/v1/Auth/delete |
-| POST | /api/v1/Auth/profile/set-avatar |
-| PUT | /api/v1/Auth/profile/change-avatar |
-| DELETE | /api/v1/Auth/profile/delete-avatar/{userId} |
-| GET | /api/v1/Auth/validate-token |
-| PUT | /api/v1/Auth/update-profile |
+|--|--|
+| POST | /api/v{version}/Auth/login |
+| POST | /api/v{version}/Auth/register |
+| POST | /api/v{version}/Auth/send-otp |
+| POST | /api/v{version}/Auth/verify-otp |
+| PUT | /api/v{version}/Auth/logout |
+| PUT | /api/v{version}/Auth/change-password |
+| DELETE | /api/v{version}/Auth/delete |
+| POST | /api/v{version}/Auth/profile/set-avatar |
+| PUT | /api/v{version}/Auth/profile/change-avatar |
+| DELETE | /api/v{version}/Auth/profile/delete-avatar/{userId} |
+| GET | /api/v{version}/Auth/validate-token |
+| PUT | /api/v{version}/Auth/update-profile |
 
 ### Category
 | HTTP Method | URL Path |
 |--|--|
-| GET | /api/v1/Category/{lang}/all |
-| GET | /api/v1/Category/{lang}/paged |
-| GET | /api/v1/Category/{lang}/{id} |
-| GET | /api/v1/Category/{id} |
-| POST | /api/v1/Category/{lang} |
-| PUT | /api/v1/Category/{lang} |
-| DELETE | /api/v1/Category/delete/{id} |
-| PATCH | /api/v1/Category/archive/{id} |
-| PATCH | /api/v1/Category/unarchive/{id} |
+| GET | /api/v{version}/Category/{lang}/all |
+| GET | /api/v{version}/Category/{lang}/paged |
+| GET | /api/v{version}/Category/{lang}/{id} |
+| GET | /api/v{version}/Category/{id} |
+| POST | /api/v{version}/Category/{lang} |
+| PUT | /api/v{version}/Category/{lang} |
+| DELETE | /api/v{version}/Category/delete/{id} |
+| PATCH | /api/v{version}/Category/archive/{id} |
+| PATCH | /api/v{version}/Category/unarchive/{id} |
 
 ### Color
 | HTTP Method | URL Path |
 |--|--|
-| GET | /api/v1/Color/{lang}/all |
-| GET | /api/v1/Color/{lang}/paged |
-| GET | /api/v1/Color/{lang}/{id} |
-| GET | /api/v1/Color/{id} |
-| POST | /api/v1/Color/{lang} |
-| PUT | /api/v1/Color/{lang} |
-| DELETE | /api/v1/Color/delete/{id} |
-| PATCH | /api/v1/Color/archive/{id} |
-| PATCH | /api/v1/Color/unarchive/{id} |
+| GET | /api/v{version}/Color/{lang}/all |
+| GET | /api/v{version}/Color/{lang}/paged |
+| GET | /api/v{version}/Color/{lang}/{id} |
+| GET | /api/v{version}/Color/{id} |
+| POST | /api/v{version}/Color/{lang} |
+| PUT | /api/v{version}/Color/{lang} |
+| DELETE | /api/v{version}/Color/delete/{id} |
+| PATCH | /api/v{version}/Color/archive/{id} |
+| PATCH | /api/v{version}/Color/unarchive/{id} |
 
 ### Furniture
 | HTTP Method | URL Path |
 |--|--|
-| GET | /api/v1/Furniture/{lang}/all |
-| GET | /api/v1/Furniture/{lang}/paged |
-| GET | /api/v1/Furniture/{lang}/{id} |
-| GET | /api/v1/Furniture/{id} |
-| POST | /api/v1/Furniture/{lang} |
-| PUT | /api/v1/Furniture/{lang} |
-| DELETE | /api/v1/Furniture/delete/{id} |
-| PATCH | /api/v1/Furniture/archive/{id} |
-| PATCH | /api/v1/Furniture/unarchive/{id} |
+| GET | /api/v{version}/Furniture/{lang}/all |
+| GET | /api/v{version}/Furniture/{lang}/paged |
+| GET | /api/v{version}/Furniture/{lang}/{id} |
+| GET | /api/v{version}/Furniture/{id} |
+| POST | /api/v{version}/Furniture/{lang} |
+| PUT | /api/v{version}/Furniture/{lang} |
+| DELETE | /api/v{version}/Furniture/delete/{id} |
+| PATCH | /api/v{version}/Furniture/archive/{id} |
+| PATCH | /api/v{version}/Furniture/unarchive/{id} |
 
 ### Image
 | HTTP Method | URL Path |
 |--|--|
-| POST | /api/v1/Image |
-| DELETE | /api/v1/Image |
-| POST | /api/v1/Image/multiple |
-| DELETE | /api/v1/Image/multiple |
+| POST | /api/v{version}/Image |
+| DELETE | /api/v{version}/Image |
+| POST | /api/v{version}/Image/multiple |
+| DELETE | /api/v{version}/Image/multiple |
 
 ### Mobile
 | HTTP Method | URL Path |
 |--|--|
-| GET | /api/v1/Mobile/categories/{lang} |
-| GET | /api/v1/Mobile/categories/{id}/{lang} |
-| GET | /api/v1/Mobile/furnitures/{lang} |
-| GET | /api/v1/Mobilefurnitures/{id}/{lang} |
-| GET | /api/v1/Mobilefurnitures/feedbacks/{furnitureId} |
-| GET | /api/v1/Mobile/feedbacks/{id} |
-| POST | /api/v1/Mobile/feedbacks |
-| POST | /api/v1/Mobile/feedbacks/ban |
+| GET | /api/v{version}/Mobile/categories/{lang} |
+| GET | /api/v{version}/Mobile/categories/{id}/{lang} |
+| GET | /api/v{version}/Mobile/furnitures/{lang} |
+| GET | /api/v{version}/Mobilefurnitures/{id}/{lang} |
+| GET | /api/v{version}/Mobilefurnitures/feedbacks/{furnitureId} |
+| GET | /api/v{version}/Mobile/feedbacks/{id} |
+| POST | /api/v{version}/Mobile/feedbacks |
+| POST | /api/v{version}/Mobile/feedbacks/ban |
 
 ### Users
 | HTTP Method | URL Path |
 |--|--|
-| GET | /api/v1/Users/all |
-| GET | /api/v1/Users/{id} |
-| DELETE | /api/v1/Users/{id} |
+| GET | /api/v{version}/Users/all |
+| GET | /api/v{version}/Users/{id} |
+| DELETE | /api/v{version}/Users/{id} |
 
 ## Entity Relationship Diagram
 > ![Structure](./structure.png)
