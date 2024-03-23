@@ -68,7 +68,7 @@
 
 ### Category
 | HTTP Method | URL Path |
-|--|--|--|--|
+|--|--|
 | GET | /api/v1/Category/{lang}/all |
 | GET | /api/v1/Category/{lang}/paged |
 | GET | /api/v1/Category/{lang}/{id} |
@@ -81,7 +81,7 @@
 
 ### Color
 | HTTP Method | URL Path |
-|--|--|--|--|
+|--|--|
 | GET | /api/v1/Color/{lang}/all |
 | GET | /api/v1/Color/{lang}/paged |
 | GET | /api/v1/Color/{lang}/{id} |
@@ -94,7 +94,7 @@
 
 ### Furniture
 | HTTP Method | URL Path |
-|--|--|--|--|
+|--|--|
 | GET | /api/v1/Furniture/{lang}/all |
 | GET | /api/v1/Furniture/{lang}/paged |
 | GET | /api/v1/Furniture/{lang}/{id} |
@@ -107,7 +107,7 @@
 
 ### Image
 | HTTP Method | URL Path |
-|--|--|--|--|
+|--|--|
 | POST | /api/v1/Image |
 | DELETE | /api/v1/Image |
 | POST | /api/v1/Image/multiple |
@@ -115,7 +115,7 @@
 
 ### Mobile
 | HTTP Method | URL Path |
-|--|--|--|--|
+|--|--|
 | GET | /api/v1/Mobile/categories/{lang} |
 | GET | /api/v1/Mobile/categories/{id}/{lang} |
 | GET | /api/v1/Mobile/furnitures/{lang} |
@@ -127,7 +127,7 @@
 
 ### Users
 | HTTP Method | URL Path |
-|--|--|--|--|
+|--|--|
 | GET | /api/v1/Users/all |
 | GET | /api/v1/Users/{id} |
 | DELETE | /api/v1/Users/{id} |
