@@ -1,4 +1,4 @@
-﻿namespace DTOs.Extended;
+﻿namespace DTOs.Common;
 
 public static class LocalTime
 {
