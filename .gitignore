@@ -121,6 +121,9 @@ ipch/
 # Visual Studio Trace Files
 *.e2e
 
+# Visual Studio Code directory
+.vscode/
+
 # TFS 2012 Local Workspace
 $tf/
 
@@ -363,4 +366,4 @@ MigrationBackup/
 FodyWeavers.xsd
 
 *.DS_Store
-
+logs/
